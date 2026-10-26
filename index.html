@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<!-- saved from url=(0034)https://fisicageneral.netlify.app/ -->
+<html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+<!-- This site is hosted on Netlify. Anyone can build and deploy a site
+     like this one for free: https://netlify.new/?utm_campaign=loops&utm_source=ai-legible&utm_medium=owned&utm_content=comment&utm_id=e3e1eeaa-8d48-4826-8819-14c482079a2a
+     Netlify hosting facts for this site: static/SSR served via Netlify Edge. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#100c18">
+  <title>FISICA GENERAL</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #100c18;
+      --panel: #1a1424;
+      --panel-light: #211a2e;
+      --purple: #a879ff;
+      --purple-bright: #c6a5ff;
+      --pink: #f09bd5;
+      --text: #f5f0fb;
+      --muted: #b7adc6;
+      --line: rgba(203, 177, 242, .15);
+      --green: #79e1bd;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      background:
+        radial-gradient(ellipse at 85% 5%, rgba(121, 71, 178, .2), transparent 34rem),
+        radial-gradient(ellipse at 4% 50%, rgba(80, 44, 112, .12), transparent 30rem),
+        var(--bg);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+    .shell { width: min(1080px, calc(100% - 40px)); margin: 0 auto; }
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 750; letter-spacing: .02em; }
+    .brand-mark {
+      display: grid; place-items: center; width: 40px; height: 40px;
+      color: #180f23; background: linear-gradient(145deg, var(--purple-bright), #8f5bdf);
+      border-radius: 13px; font-size: 22px; font-weight: 900;
+      box-shadow: 0 6px 24px rgba(168, 121, 255, .24);
+    }
+    .eyebrow { color: var(--purple-bright); font-size: .77rem; font-weight: 750; letter-spacing: .15em; text-transform: uppercase; }
+    main { padding: 58px 0 76px; }
+    .view { display: none; animation: appear .24s ease-out; }
+    .view.active { display: block; }
+    @keyframes appear { from { opacity: 0; transform: translateY(7px); } to { opacity: 1; transform: translateY(0); } }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { max-width: 760px; margin: 8px 0 14px; font-size: clamp(2.5rem, 7vw, 4.8rem); line-height: 1.05; letter-spacing: -.055em; }
+    h1 span { color: var(--purple-bright); }
+    h2 { margin-bottom: 10px; font-size: clamp(1.8rem, 4vw, 2.7rem); line-height: 1.15; letter-spacing: -.035em; }
+    h3 { margin-bottom: 8px; }
+    .lead { max-width: 640px; color: var(--muted); font-size: 1.08rem; }
+    .hero { padding: 36px 0 30px; }
+    .hero-stats { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 25px; }
+    .tag { padding: 7px 12px; color: #ded1f1; background: rgba(255,255,255,.045); border: 1px solid var(--line); border-radius: 999px; font-size: .83rem; }
+    .menu-grid, .unit-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 32px; }
+    .menu-card, .unit-card, .panel {
+      background: linear-gradient(145deg, rgba(38, 29, 52, .96), rgba(25, 19, 35, .96));
+      border: 1px solid var(--line); border-radius: 20px;
+      box-shadow: 0 14px 35px rgba(0,0,0,.12);
+    }
+    .menu-card {
+      min-height: 190px; padding: 23px; text-align: left; color: inherit;
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+    }
+    .menu-card:hover, .unit-card:hover { transform: translateY(-3px); border-color: rgba(198,165,255,.55); background-color: #241a32; }
+    .card-icon { display: grid; place-items: center; width: 44px; height: 44px; margin-bottom: 22px; color: var(--purple-bright); background: rgba(168,121,255,.13); border-radius: 14px; font-size: 1.3rem; }
+    .menu-card strong { display: block; margin-bottom: 7px; font-size: 1.15rem; }
+    .menu-card span:last-child { color: var(--muted); font-size: .91rem; }
+    .section-heading { display: flex; justify-content: space-between; align-items: end; gap: 20px; }
+    .unit-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .unit-card { display: flex; align-items: center; gap: 16px; padding: 18px; text-align: left; color: inherit; transition: .18s ease; }
+    .unit-number { display: grid; flex: 0 0 48px; place-items: center; width: 48px; height: 48px; color: var(--purple-bright); background: rgba(168,121,255,.12); border-radius: 14px; font-weight: 800; }
+    .unit-card strong { line-height: 1.35; }
+    .toolbar { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-bottom: 28px; }
+    .back-button, .secondary-button, .primary-button {
+      display: inline-flex; justify-content: center; align-items: center; gap: 8px;
+      min-height: 44px; padding: 10px 16px; border-radius: 12px; font-weight: 700;
+    }
+    .back-button, .secondary-button { color: #e6dbf5; background: #211a2e; border: 1px solid var(--line); }
+    .back-button:hover, .secondary-button:hover { border-color: rgba(198,165,255,.5); }
+    .primary-button { color: #180f23; background: linear-gradient(135deg, #cfb4ff, #a879ff); border: 0; box-shadow: 0 8px 22px rgba(168,121,255,.2); }
+    .primary-button:hover { filter: brightness(1.08); }
+    .topic-content { max-width: 800px; padding: clamp(22px, 5vw, 40px); }
+    .topic-content p, .topic-content li { color: #d0c6dc; }
+    .topic-content ul { padding-left: 23px; }
+    .formula { margin: 22px 0; padding: 18px 20px; color: var(--purple-bright); background: rgba(168,121,255,.09); border: 1px solid rgba(168,121,255,.2); border-radius: 14px; font-size: 1.12rem; font-weight: 750; }
+    .unit-graph-wrap { margin: 16px 0 24px; padding: 16px; background: rgba(255,255,255,.025); border: 1px solid var(--line); border-radius: 14px; }
+    .unit-graph { display: block; width: 100%; height: auto; max-height: 280px; }
+    .unit-graph text { fill: var(--text); font: 14px Inter, ui-sans-serif, system-ui, sans-serif; }
+    .unit-graph .axis { stroke: rgba(203,177,242,.45); stroke-width: 2; }
+    .unit-graph .object { fill: rgba(168,121,255,.18); stroke: var(--purple-bright); stroke-width: 2; }
+    .unit-graph .force { stroke: var(--green); stroke-width: 3; }
+    .unit-graph .component { stroke: var(--pink); stroke-width: 3; }
+    .unit-graph .guide { stroke: rgba(203,177,242,.55); stroke-width: 1.5; stroke-dasharray: 5 5; }
+    .theory-topic { margin-top: 24px; padding: 20px; background: rgba(255,255,255,.025); border: 1px solid var(--line); border-radius: 16px; }
+    .theory-topic h3 { color: var(--purple-bright); }
+    .theory-topic ul { margin-bottom: 0; }
+    .theory-visual { display: grid; grid-template-columns: minmax(180px, .75fr) minmax(0, 1.25fr); align-items: center; gap: 20px; margin: 16px 0; padding: 16px; background: rgba(168,121,255,.055); border-radius: 13px; }
+    .theory-visual svg { display: block; width: 100%; height: auto; }
+    .theory-visual text { fill: var(--text); font: 13px Inter, ui-sans-serif, system-ui, sans-serif; }
+    .theory-visual .shape { fill: rgba(168,121,255,.18); stroke: var(--purple-bright); stroke-width: 2; }
+    .theory-visual .flow { fill: none; stroke: var(--green); stroke-width: 3; }
+    .theory-visual .heat { fill: none; stroke: var(--pink); stroke-width: 3; }
+    .theory-visual figcaption { color: var(--muted); font-size: .9rem; }
+    .theory-visual .formula { margin: 8px 0; }
+    .data-panel, .calculator-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 20px; margin-top: 28px; }
+    .panel { padding: 24px; }
+    .field-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+    label { display: grid; gap: 7px; color: #e8e0f0; font-size: .9rem; font-weight: 650; }
+    input {
+      width: 100%; min-height: 46px; padding: 10px 12px; color: var(--text);
+      background: #120e1a; border: 1px solid rgba(203,177,242,.2); border-radius: 11px; outline: none;
+    }
+    input:focus { border-color: var(--purple); box-shadow: 0 0 0 3px rgba(168,121,255,.13); }
+    input::placeholder { color: #786d87; }
+    .form-actions { display: flex; gap: 10px; margin-top: 18px; }
+    .hint, .muted { color: var(--muted); font-size: .9rem; }
+    .saved-data { display: grid; gap: 13px; margin: 0; }
+    .saved-data div { padding-bottom: 11px; border-bottom: 1px solid var(--line); }
+    .saved-data dt { color: var(--muted); font-size: .81rem; }
+    .saved-data dd { margin: 3px 0 0; font-weight: 700; overflow-wrap: anywhere; }
+    .calculator-grid { grid-template-columns: .82fr 1.18fr; align-items: start; }
+    .calculator-form { display: grid; gap: 15px; }
+    .calculator-form .form-actions { margin-top: 4px; }
+    .thermo-intro-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 24px; }
+    .thermo-panel h3 { color: var(--purple-bright); }
+    .concept-list { display: grid; gap: 13px; padding: 0; list-style: none; }
+    .concept-list li { padding: 15px; background: rgba(255,255,255,.035); border: 1px solid var(--line); border-radius: 13px; }
+    .concept-list strong { color: var(--purple-bright); }
+    .example { margin-top: 14px; padding: 13px 15px; background: rgba(121,225,189,.07); border-left: 3px solid var(--green); border-radius: 4px 12px 12px 4px; }
+    .example strong { color: var(--green); }
+    .table-wrap { overflow-x: auto; margin-top: 22px; border: 1px solid var(--line); border-radius: 14px; }
+    table { width: 100%; border-collapse: collapse; text-align: left; }
+    th, td { padding: 14px 16px; border-bottom: 1px solid var(--line); }
+    th { color: var(--purple-bright); background: rgba(168,121,255,.09); font-size: .87rem; }
+    td { color: #e4dbea; }
+    tbody tr:last-child td { border-bottom: 0; }
+    .calculator-workspace { display: grid; grid-template-columns: .85fr 1.15fr; align-items: start; gap: 20px; margin-top: 22px; }
+    .calculator-workspace form { display: grid; gap: 15px; }
+    .procedure { min-height: 90px; }
+    .procedure ol { padding-left: 22px; color: #d0c6dc; }
+    .procedure li { margin: 8px 0; }
+    .procedure .formula { margin: 12px 0; }
+    .thermo-result { color: var(--green); font-size: 1.12rem; font-weight: 800; }
+    .result { margin-top: 20px; padding: 16px; background: rgba(121,225,189,.08); border: 1px solid rgba(121,225,189,.2); border-radius: 14px; }
+    .result[hidden] { display: none; }
+    .result strong { display: block; margin-bottom: 8px; color: var(--green); }
+    .result p { margin: 3px 0; color: #e0d8e8; font-size: .93rem; }
+    .chart-panel { min-width: 0; }
+    .chart-panel h3 { margin-bottom: 2px; }
+    .chart-panel canvas { display: block; width: 100%; height: 330px; margin-top: 12px; }
+    .legend { display: flex; flex-wrap: wrap; gap: 15px; color: var(--muted); font-size: .82rem; }
+    .legend span { display: inline-flex; align-items: center; gap: 7px; }
+    .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--purple-bright); }
+    .dot.x { background: var(--pink); }
+    .dot.y { background: var(--green); }
+    .error { min-height: 22px; margin: 0; color: #ff9dba; font-size: .88rem; }
+    footer { padding: 20px 0 30px; color: #857b91; border-top: 1px solid var(--line); font-size: .83rem; }
+    @media (max-width: 720px) {
+      main { padding-top: 38px; }
+      .menu-grid { grid-template-columns: 1fr; gap: 12px; }
+      .menu-card { min-height: 145px; }
+      .card-icon { margin-bottom: 14px; }
+      .data-panel, .calculator-grid { grid-template-columns: 1fr; }
+      .calculator-workspace, .thermo-intro-grid { grid-template-columns: 1fr; }
+      .chart-panel canvas { height: 280px; }
+      .theory-visual { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      .shell { width: min(100% - 28px, 1080px); }
+      header { padding: 18px 0; }
+      main { padding-bottom: 50px; }
+      .unit-grid, .field-grid { grid-template-columns: 1fr; }
+      .unit-card { padding: 14px; }
+      .toolbar { align-items: flex-start; }
+      .toolbar .eyebrow { padding-top: 10px; text-align: right; }
+      .panel { padding: 19px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header>
+      <div class="brand"><span class="brand-mark" aria-hidden="true">∑</span><span>FISICA GENERAL</span></div>
+      <span class="eyebrow">Aprende · comprende · aplica</span>
+    </header>
+
+    <main>
+      <section id="main-menu" class="view active" aria-labelledby="main-menu-title">
+        <div class="hero">
+          <p class="eyebrow">Bienvenidas</p>
+          <h1 id="main-menu-title">MENU <span>PRINCIPAL</span></h1>
+          <p class="lead">Elige un programa para comenzar o consulta los datos del proyecto.</p>
+        </div>
+        <div class="menu-grid" aria-label="Programas principales">
+          <button class="menu-card" data-view="program1">
+            <span class="card-icon" aria-hidden="true">01</span>
+            <strong>PROGRAMA 1</strong>
+            <span>Física-Fuerzas Coplanares</span>
+          </button>
+          <button class="menu-card" data-view="program2">
+            <span class="card-icon" aria-hidden="true">02</span>
+            <strong>PROGRAMA 2</strong>
+            <span>Física general-Termodinámica</span>
+          </button>
+          <button class="menu-card" data-view="datos">
+            <span class="card-icon" aria-hidden="true">◎</span>
+            <strong>Datos del proyecto</strong>
+            <span>Encargadas, materia, carrera y semestre.</span>
+          </button>
+        </div>
+      </section>
+
+      <section id="program1" class="view" aria-labelledby="home-title">
+        <div class="toolbar"><button class="back-button" data-view="main-menu">← MENU PRINCIPAL</button><span class="eyebrow">PROGRAMA 1 · Física-Fuerzas Coplanares</span></div>
+        <div class="hero">
+          <p class="eyebrow">Tu espacio de aprendizaje</p>
+          <h1 id="home-title">Las fuerzas explican <span>el movimiento.</span></h1>
+          <p class="lead">Explora los fundamentos de la estática y la mecánica, repasa tus unidades y resuelve ejercicios de fuerza paso a paso.</p>
+          <div class="hero-stats"><span class="tag">6 unidades de estudio</span><span class="tag">Calculadora interactiva</span><span class="tag">Física clásica</span></div>
+        </div>
+        <div class="menu-grid" aria-label="Menú del programa 1">
+          <button class="menu-card" data-view="unidades">
+            <span class="card-icon" aria-hidden="true">⌘</span>
+            <strong>Unidades</strong>
+            <span>Estudia conceptos, fuerzas, equilibrio y momentos.</span>
+          </button>
+          <button class="menu-card" data-view="calculadora">
+            <span class="card-icon" aria-hidden="true">∠</span>
+            <strong>Calculadora</strong>
+            <span>Calcula la fuerza y observa sus componentes en una gráfica.</span>
+          </button>
+        </div>
+      </section>
+
+      <section id="datos" class="view" aria-labelledby="datos-title">
+        <div class="toolbar"><button class="back-button" data-view="main-menu">← MENU PRINCIPAL</button><span class="eyebrow">Perfil académico</span></div>
+        <p class="eyebrow">Mis datos</p><h2 id="datos-title">Datos del proyecto</h2>
+        <p class="lead">Información académica de las encargadas del proyecto.</p>
+        <div class="panel">
+          <dl class="saved-data">
+            <div><dt>Encargadas del proyecto</dt><dd>Yamileth Carballo Santiago, Karen Viviana Jimenez Santiago</dd></div>
+            <div><dt>Materia</dt><dd>Física General</dd></div>
+            <div><dt>Carrera</dt><dd>Ing.Sistemas Computacionales</dd></div>
+            <div><dt>Semestre</dt><dd>3° Semestre</dd></div>
+          </dl>
+        </div>
+      </section>
+
+      <section id="program2" class="view" aria-labelledby="program2-title">
+        <div class="toolbar"><button class="back-button" data-view="main-menu">← MENU PRINCIPAL</button><span class="eyebrow">PROGRAMA 2</span></div>
+        <p class="eyebrow">Física general</p>
+        <h2 id="program2-title">Termodinámica</h2>
+        <p class="lead">Elige una sección para estudiar la energía térmica, consultar conceptos y fórmulas, revisar calores específicos o resolver ejercicios paso a paso.</p>
+        <div class="menu-grid" aria-label="Secciones de termodinámica">
+          <button class="menu-card" data-view="thermo-intro"><span class="card-icon" aria-hidden="true">T</span><strong>TERMODINAMICA</strong><span>Principios, procesos y ejemplos de sistemas térmicos.</span></button>
+          <button class="menu-card" data-view="thermo-theory"><span class="card-icon" aria-hidden="true">4.1</span><strong>4.1 Conceptos Teóricos</strong><span>Sistemas, temperatura, capacidad calorífica y leyes.</span></button>
+          <button class="menu-card" data-view="thermo-capacity"><span class="card-icon" aria-hidden="true">c</span><strong>Capacidad Calorífica Y calores Específicos</strong><span>Tabla de valores aproximados de materiales comunes.</span></button>
+          <button class="menu-card" data-view="thermo-calculators"><span class="card-icon" aria-hidden="true">∑</span><strong>Calculadoras y Conversores</strong><span>Calor, calor específico, temperatura y equivalencias.</span></button>
+        </div>
+      </section>
+
+      <section id="thermo-intro" class="view" aria-labelledby="thermo-intro-title">
+        <div class="toolbar"><button class="back-button" data-view="program2">← Programa 2</button><span class="eyebrow">Fundamentos</span></div>
+        <p class="eyebrow">Energía térmica</p><h2 id="thermo-intro-title">Termodinámica</h2>
+        <article class="panel topic-content">
+          <p>La <strong>termodinámica</strong> estudia cómo se transfiere y transforma la energía en forma de calor y trabajo. Se aplica, por ejemplo, a motores, refrigeradores y cambios de temperatura.</p>
+          <p>El <strong>sistema</strong> es lo que se estudia y el entorno es todo lo que lo rodea. Un sistema abierto intercambia materia y energía; uno cerrado intercambia energía, pero no materia; uno aislado idealmente no intercambia ninguno.</p>
+          <p>La <strong>temperatura</strong> describe el estado térmico; el <strong>calor</strong> es energía que pasa de un cuerpo caliente a uno más frío. El <strong>trabajo</strong> también transfiere energía, como cuando un gas mueve un pistón. La primera ley relaciona estas transferencias con el cambio de energía interna:</p>
+          <div class="formula">ΔU = Q − W</div>
+          <p>Para calentar una sustancia sin cambiar su fase se usa <strong>Q = m·c·ΔT</strong>. En un cambio de fase, como la fusión, se utiliza <strong>Q = m·L</strong>.</p>
+          <p>El calor se transfiere por <strong>conducción</strong> (contacto), <strong>convección</strong> (movimiento de fluidos) o <strong>radiación</strong> (ondas, incluso en el vacío). Un proceso puede mantener constante la temperatura, presión o volumen; si no intercambia calor es adiabático.</p>
+          <p>Las leyes resumen el comportamiento térmico: la <strong>ley cero</strong> define el equilibrio térmico; la <strong>primera</strong>, la conservación de energía; la <strong>segunda</strong>, el sentido natural del calor; y la <strong>tercera</strong>, el comportamiento de la entropía cerca del cero absoluto.</p>
+          <div class="example"><strong>Ejemplo:</strong> Un gas recibe 500 J de calor y realiza 180 J de trabajo. Entonces ΔU = 500 − 180 = 320 J.</div>
+        </article>
+      </section>
+
+      <section id="thermo-theory" class="view" aria-labelledby="thermo-theory-title">
+        <div class="toolbar"><button class="back-button" data-view="program2">← Programa 2</button><span class="eyebrow">Temas 4.1 a 4.4</span></div>
+        <p class="eyebrow">Conceptos, definiciones y leyes</p><h2 id="thermo-theory-title">4.1 Conceptos Teóricos</h2>
+        <article class="panel topic-content">
+          <p>En cada tema encontrarás una explicación, sus características, una ilustración, la fórmula y un ejemplo práctico.</p>
+          <section class="theory-topic" aria-labelledby="theory-system-title">
+            <h3 id="theory-system-title">4.1 Sistemas termodinámicos</h3>
+            <p><strong>Información:</strong> Un sistema es la parte del universo que se analiza; lo demás es el entorno. La frontera separa ambos.</p>
+            <p><strong>Características:</strong></p>
+            <ul>
+              <li><strong>Abierto:</strong> intercambia materia y energía, como una olla destapada.</li>
+              <li><strong>Cerrado:</strong> intercambia energía, pero no materia, como una botella sellada que se calienta.</li>
+              <li><strong>Aislado:</strong> idealmente no intercambia materia ni energía, como un termo perfecto.</li>
+            </ul>
+            <figure class="theory-visual">
+              <svg viewBox="0 0 260 150" role="img" aria-label="Sistema abierto que intercambia materia y energía con el entorno">
+                <defs><marker id="theory-system-arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#79e1bd"/></marker></defs>
+                <rect class="shape" x="88" y="42" width="84" height="66" rx="8"/><text x="102" y="78">Sistema</text><text x="100" y="96">ρ = m/V</text>
+                <path class="flow" d="M18 75 H78" marker-end="url(#theory-system-arrow)"/><text x="15" y="62">Materia</text>
+                <path class="heat" d="M242 75 H182" marker-end="url(#theory-system-arrow)"/><text x="199" y="62">Energía</text>
+                <text x="91" y="132">Frontera</text>
+              </svg>
+              <figcaption><strong>Fórmula:</strong><div class="formula">ρ = m/V</div><strong>Ejemplo:</strong> Si hay 2 kg en 0.002 m³, ρ = 1000 kg/m³.</figcaption>
+            </figure>
+          </section>
+          <section class="theory-topic" aria-labelledby="theory-temperature-title">
+            <h3 id="theory-temperature-title">4.2 Escalas de temperatura</h3>
+            <p><strong>Información:</strong> La temperatura indica qué tan caliente o frío está un cuerpo. El calor fluye espontáneamente del cuerpo con mayor temperatura al de menor temperatura.</p>
+            <p><strong>Características:</strong></p>
+            <ul>
+              <li>Celsius (°C) y Fahrenheit (°F) se usan en la vida diaria.</li>
+              <li>Kelvin (K) comienza en el cero absoluto y se usa en cálculos científicos.</li>
+              <li>Una diferencia de 1 °C equivale a una diferencia de 1 K.</li>
+            </ul>
+            <figure class="theory-visual">
+              <svg viewBox="0 0 260 150" role="img" aria-label="Termómetro que representa una temperatura de 25 grados Celsius">
+                <rect class="shape" x="40" y="25" width="28" height="88" rx="14"/><circle class="shape" cx="54" cy="116" r="20"/>
+                <rect x="49" y="62" width="10" height="53" rx="5" fill="#f09bd5"/><circle cx="54" cy="116" r="12" fill="#f09bd5"/>
+                <line class="flow" x1="86" y1="83" x2="116" y2="83"/><text x="126" y="88">25 °C</text>
+                <text x="120" y="116">298.15 K</text><line class="shape" x1="72" y1="40" x2="83" y2="40"/><line class="shape" x1="72" y1="65" x2="83" y2="65"/><line class="shape" x1="72" y1="90" x2="83" y2="90"/>
+              </svg>
+              <figcaption><strong>Fórmula:</strong><div class="formula">T(K) = T(°C) + 273.15</div><strong>Ejemplo:</strong> 25 °C + 273.15 = 298.15 K.</figcaption>
+            </figure>
+          </section>
+          <section class="theory-topic" aria-labelledby="theory-heat-title">
+            <h3 id="theory-heat-title">4.3 Capacidad calorífica y calor específico</h3>
+            <p><strong>Información:</strong> El calor específico indica cuánta energía necesita un kilogramo de una sustancia para aumentar su temperatura un grado.</p>
+            <p><strong>Características:</strong></p>
+            <ul>
+              <li>Depende del material; el agua requiere relativamente mucho calor para calentarse.</li>
+              <li>Q es positivo cuando el cuerpo absorbe calor y negativo cuando lo libera.</li>
+              <li>La fórmula se aplica si no ocurre un cambio de fase.</li>
+            </ul>
+            <figure class="theory-visual">
+              <svg viewBox="0 0 260 150" role="img" aria-label="Calor que entra a un recipiente con agua y eleva su temperatura">
+                <defs><marker id="theory-heat-arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#f09bd5"/></marker></defs>
+                <path class="shape" d="M80 48 H168 L158 122 H90 Z"/><path d="M88 83 H160 L155 118 H93 Z" fill="rgba(121,225,189,.28)"/>
+                <text x="107" y="105">Agua</text><path class="heat" d="M24 82 H74" marker-end="url(#theory-heat-arrow)"/><text x="21" y="68">Calor Q</text>
+                <text x="94" y="39">Ti → Tf</text><text x="82" y="143">m = 0.5 kg</text>
+              </svg>
+              <figcaption><strong>Fórmula:</strong><div class="formula">Q = m·c·ΔT</div><strong>Ejemplo:</strong> 0.5 kg de agua sube 10 °C: Q = 0.5·4184·10 = 20 920 J.</figcaption>
+            </figure>
+          </section>
+          <section class="theory-topic" aria-labelledby="theory-laws-title">
+            <h3 id="theory-laws-title">4.4 Leyes de la termodinámica</h3>
+            <p><strong>Información:</strong> Las leyes explican el equilibrio térmico, la conservación de energía y el sentido de los procesos naturales.</p>
+            <p><strong>Características:</strong></p>
+            <ul>
+              <li><strong>Ley cero:</strong> permite comparar temperaturas.</li>
+              <li><strong>Primera ley:</strong> la energía se conserva.</li>
+              <li><strong>Segunda ley:</strong> el calor fluye espontáneamente de caliente a frío.</li>
+              <li><strong>Tercera ley:</strong> describe la entropía al acercarse al cero absoluto.</li>
+            </ul>
+            <figure class="theory-visual">
+              <svg viewBox="0 0 260 150" role="img" aria-label="Gas que recibe calor y realiza trabajo, cambiando su energía interna">
+                <defs><marker id="theory-law-arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#79e1bd"/></marker><marker id="theory-work-arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#f09bd5"/></marker></defs>
+                <rect class="shape" x="82" y="48" width="94" height="70" rx="8"/><text x="108" y="82">Gas</text><text x="101" y="103">ΔU</text>
+                <path class="heat" d="M18 82 H72" marker-end="url(#theory-work-arrow)"/><text x="21" y="67">Q entra</text>
+                <path class="flow" d="M183 82 H244" marker-end="url(#theory-law-arrow)"/><text x="187" y="67">W sale</text>
+                <text x="94" y="139">Energía del sistema</text>
+              </svg>
+              <figcaption><strong>Fórmula:</strong><div class="formula">ΔU = Q − W</div><strong>Ejemplo:</strong> Si Q = 800 J y W = 300 J, ΔU = 500 J.</figcaption>
+            </figure>
+          </section>
+        </article>
+      </section>
+
+      <section id="thermo-capacity" class="view" aria-labelledby="thermo-capacity-title">
+        <div class="toolbar"><button class="back-button" data-view="program2">← Programa 2</button><span class="eyebrow">Datos de referencia</span></div>
+        <p class="eyebrow">Valores aproximados</p><h2 id="thermo-capacity-title">Capacidad Calorífica Y calores Específicos</h2>
+        <p class="lead">El calor específico c es la energía necesaria para elevar en un grado la temperatura de un kilogramo de material. Los valores cambian con la temperatura, la composición y el estado del material; estos son valores orientativos.</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Material</th><th>Calor específico (J/kg · °C)</th><th>Calor específico (kcal/kg · °C)</th></tr></thead>
+          <tbody>
+            <tr><td>Agua líquida</td><td>4 184</td><td>1.000</td></tr>
+            <tr><td>Hielo</td><td>2 090</td><td>0.500</td></tr>
+            <tr><td>Aluminio</td><td>900</td><td>0.215</td></tr>
+            <tr><td>Cobre</td><td>385</td><td>0.092</td></tr>
+            <tr><td>Hierro / acero (aprox.)</td><td>450</td><td>0.108</td></tr>
+            <tr><td>Etanol</td><td>2 440</td><td>0.583</td></tr>
+            <tr><td>Plomo</td><td>128</td><td>0.031</td></tr>
+          </tbody>
+        </table></div>
+        <p class="hint">Conversión utilizada: 1 kcal = 4 184 J. Como las diferencias de °C y K tienen el mismo tamaño, el calor específico también puede expresarse en J/(kg · K).</p>
+      </section>
+
+      <section id="thermo-calculators" class="view" aria-labelledby="thermo-calculators-title">
+        <div class="toolbar"><button class="back-button" data-view="program2">← Programa 2</button><span class="eyebrow">Herramientas interactivas</span></div>
+        <p class="eyebrow">Selecciona una calculadora</p><h2 id="thermo-calculators-title">Calculadoras y Conversores</h2>
+        <div class="unit-grid">
+          <button class="unit-card" data-thermo-calc="heat"><span class="unit-number">Q</span><strong>Cálculo de Calor</strong></button>
+          <button class="unit-card" data-thermo-calc="specific-heat"><span class="unit-number">c</span><strong>Cálculo de Calor Específico</strong></button>
+          <button class="unit-card" data-thermo-calc="temperature"><span class="unit-number">°</span><strong>Conversor de temperatura</strong></button>
+          <button class="unit-card" data-thermo-calc="equivalence"><span class="unit-number">↔</span><strong>Equivalencias de calor</strong></button>
+        </div>
+      </section>
+
+      <section id="thermo-calc" class="view" aria-labelledby="thermo-calc-title">
+        <div class="toolbar"><button class="back-button" data-view="thermo-calculators">← Calculadoras y Conversores</button><span class="eyebrow">Cálculo paso a paso</span></div>
+        <p class="eyebrow">Termodinámica</p><h2 id="thermo-calc-title">Calculadora</h2>
+        <div class="calculator-workspace">
+          <form id="thermo-calc-form" class="panel">
+            <div id="thermo-calc-fields" class="calculator-form"></div>
+            <p id="thermo-calc-error" class="error" aria-live="polite"></p>
+            <div class="form-actions">
+              <button class="primary-button" type="submit">Calcular</button>
+              <button id="thermo-calc-clear" class="secondary-button" type="button">Borrar</button>
+            </div>
+          </form>
+          <article class="panel procedure" aria-live="polite">
+            <h3>Procedimiento y resultado</h3>
+            <div id="thermo-calc-result" class="muted">Ingresa los datos y presiona Calcular. Aquí se mostrará la fórmula, la sustitución y el resultado.</div>
+          </article>
+        </div>
+      </section>
+
+      <section id="unidades" class="view" aria-labelledby="unidades-title">
+        <div class="toolbar"><button class="back-button" data-view="program1">← Menú del programa 1</button><span class="eyebrow">Contenido del curso</span></div>
+        <p class="eyebrow">Ruta de aprendizaje</p><h2 id="unidades-title">Unidades</h2>
+        <p class="lead">Selecciona un tema para consultar sus ideas clave y ecuaciones principales.</p>
+        <div id="unit-list" class="unit-grid"></div>
+      </section>
+
+      <section id="tema" class="view" aria-labelledby="topic-title">
+        <div class="toolbar"><button class="back-button" data-view="unidades">← Regresar a unidades</button><span class="eyebrow">Unidad de estudio</span></div>
+        <article id="topic-content" class="panel topic-content"></article>
+      </section>
+
+      <section id="calculadora" class="view" aria-labelledby="calculator-title">
+        <div class="toolbar"><button class="back-button" data-view="program1">← Menú del programa 1</button><span class="eyebrow">Herramienta interactiva</span></div>
+        <p class="eyebrow">Segunda ley de Newton</p>
+        <h2 id="calculator-title">Calculadora</h2>
+        <p class="lead">Introduce los datos para calcular la fuerza y sus componentes. El ángulo se mide desde el eje horizontal positivo.</p>
+        <div class="calculator-grid">
+          <form id="force-form" class="panel calculator-form" novalidate="">
+            <label>Masa (kg)<input id="mass" type="number" min="0" step="any" placeholder="Ej. 5" inputmode="decimal" required=""></label>
+            <label>Aceleración (m/s²)<input id="acceleration" type="number" min="0" step="any" placeholder="Ej. 3.2" inputmode="decimal" required=""></label>
+            <label>Ángulo (grados)<input id="angle" type="number" step="any" placeholder="Ej. 45" inputmode="decimal" required=""></label>
+            <p id="calc-error" class="error" aria-live="polite"></p>
+            <div class="form-actions">
+              <button class="primary-button" type="submit">Calcular</button>
+              <button id="clear-button" class="secondary-button" type="button">Borrar</button>
+            </div>
+          </form>
+          <div class="panel chart-panel">
+            <h3>Gráfica de la fuerza</h3>
+            <p class="muted">Vector resultante y componentes horizontal y vertical.</p>
+            <div class="legend"><span><i class="dot"></i>Resultante F</span><span><i class="dot x"></i>Componente Fx</span><span><i class="dot y"></i>Componente Fy</span></div>
+            <canvas id="force-chart" role="img" aria-label="Gráfica de los vectores de fuerza" width="0" height="0">Gráfica de las componentes de la fuerza.</canvas>
+            <div id="result" class="result" aria-live="polite" hidden=""></div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer>FISICA GENERAL <span aria-hidden="true">·</span> Material de apoyo para el estudio de la mecánica.</footer>
+  </div>
+  <script>
+    const units = [
+      {
+        number: "1.1", title: "Conceptos básicos y definiciones",
+        information: "La mecánica estudia el movimiento y el equilibrio. La fuerza es una magnitud vectorial que puede cambiar el movimiento; la masa mide la inercia y el peso es la fuerza de gravedad sobre un cuerpo.",
+        example: "Una mochila de 2 kg tiene un peso aproximado de 19.6 N en la Tierra. Si además recibe una fuerza neta de 6 N, su aceleración es 3 m/s².",
+        formula: "F⃗net = m·a⃗  ···  P = m·g  ···  1 N = 1 kg·m/s²",
+        graph: `<svg class="unit-graph" viewBox="0 0 420 220" role="img" aria-label="Diagrama de cuerpo libre de un bloque con peso hacia abajo y fuerza normal hacia arriba">
+          <defs><marker id="u11-arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#79e1bd"/></marker><marker id="u11-weight" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#f09bd5"/></marker></defs>
+          <line class="axis" x1="80" y1="170" x2="340" y2="170"/><rect class="object" x="175" y="90" width="70" height="55" rx="8"/>
+          <line class="force" x1="210" y1="90" x2="210" y2="35" marker-end="url(#u11-arrow)"/><text x="225" y="52">N (normal)</text>
+          <line class="component" x1="210" y1="145" x2="210" y2="195" marker-end="url(#u11-weight)"/><text x="225" y="198">P = mg (peso)</text>
+          <text x="188" y="124">cuerpo</text><text x="117" y="207">Superficie</text>
+        </svg>`
+      },
+      {
+        number: "1.2", title: "Resultante de fuerzas coplanares",
+        information: "La fuerza resultante es la suma vectorial de las fuerzas coplanares. Se suman por separado sus componentes horizontal y vertical; la orientación de cada fuerza determina el signo de sus componentes.",
+        example: "Una fuerza de 3 N hacia la derecha y otra de 4 N hacia arriba producen una resultante de 5 N a 53.1° sobre la horizontal.",
+        formula: "Rx = ΣFx  ···  Ry = ΣFy  ···  R = √(Rx² + Ry²)  ···  θ = atan2(Ry, Rx)",
+        graph: `<svg class="unit-graph" viewBox="0 0 420 220" role="img" aria-label="Suma de vectores de 3 newtons y 4 newtons con resultante de 5 newtons">
+          <defs><marker id="u12-arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#79e1bd"/></marker><marker id="u12-result" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#f09bd5"/></marker></defs>
+          <line class="axis" x1="70" y1="180" x2="350" y2="180"/><line class="axis" x1="90" y1="195" x2="90" y2="30"/>
+          <line class="force" x1="90" y1="180" x2="240" y2="180" marker-end="url(#u12-arrow)"/><text x="135" y="205">Fx = 3 N</text>
+          <line class="force" x1="240" y1="180" x2="240" y2="70" marker-end="url(#u12-arrow)"/><text x="248" y="105">Fy = 4 N</text>
+          <line class="component" x1="90" y1="180" x2="240" y2="70" marker-end="url(#u12-result)"/><text x="116" y="98">R = 5 N</text><text x="95" y="32">y</text><text x="350" y="198">x</text>
+        </svg>`
+      },
+      {
+        number: "1.3", title: "Componentes rectangulares de una fuerza",
+        information: "Una fuerza inclinada se puede reemplazar por dos componentes perpendiculares, una horizontal y otra vertical. Si el ángulo se mide desde el eje x, el coseno determina Fx y el seno determina Fy.",
+        example: "Al tirar de un carrito con 10 N a 30° sobre la horizontal, la componente horizontal es 8.66 N y la vertical es 5 N.",
+        formula: "Fx = F cos θ  ···  Fy = F sen θ  ···  F = √(Fx² + Fy²)",
+        graph: `<svg class="unit-graph" viewBox="0 0 420 220" role="img" aria-label="Fuerza de 10 newtons a 30 grados, descompuesta en 8.66 newtons horizontales y 5 newtons verticales">
+          <defs><marker id="u13-force" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#79e1bd"/></marker><marker id="u13-component" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#f09bd5"/></marker></defs>
+          <line class="axis" x1="70" y1="180" x2="360" y2="180"/><line class="axis" x1="90" y1="195" x2="90" y2="30"/>
+          <line class="component" x1="90" y1="180" x2="285" y2="180" marker-end="url(#u13-component)"/><text x="145" y="204">Fx = 8.66 N</text>
+          <line class="component" x1="285" y1="180" x2="285" y2="67" marker-end="url(#u13-component)"/><text x="294" y="118">Fy = 5 N</text>
+          <line class="force" x1="90" y1="180" x2="285" y2="67" marker-end="url(#u13-force)"/><text x="127" y="98">F = 10 N</text><text x="130" y="168">30°</text><text x="360" y="198">x</text><text x="95" y="32">y</text>
+        </svg>`
+      },
+      {
+        number: "1.4", title: "Condiciones de equilibrio y primera ley de Newton",
+        information: "Un cuerpo está en equilibrio traslacional cuando las fuerzas se compensan en cada eje. Según la primera ley de Newton, si la fuerza neta es cero, permanece en reposo o sigue con velocidad constante.",
+        example: "Una lámpara de 5 kg cuelga inmóvil. Su peso es 49.05 N hacia abajo y la tensión de la cuerda es 49.05 N hacia arriba; por eso la fuerza neta es cero.",
+        formula: "ΣFx = 0  ···  ΣFy = 0  ···  ΣF⃗ = 0 ⇒ a⃗ = 0",
+        graph: `<svg class="unit-graph" viewBox="0 0 420 220" role="img" aria-label="Lámpara en equilibrio con tensión hacia arriba igual al peso hacia abajo">
+          <defs><marker id="u14-arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#79e1bd"/></marker><marker id="u14-weight" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#f09bd5"/></marker></defs>
+          <line class="axis" x1="130" y1="42" x2="290" y2="42"/><line class="guide" x1="210" y1="42" x2="210" y2="78"/>
+          <rect class="object" x="170" y="78" width="80" height="58" rx="12"/><text x="193" y="113">5 kg</text>
+          <line class="force" x1="210" y1="78" x2="210" y2="25" marker-end="url(#u14-arrow)"/><text x="225" y="31">T = 49.05 N</text>
+          <line class="component" x1="210" y1="136" x2="210" y2="192" marker-end="url(#u14-weight)"/><text x="225" y="187">P = mg = 49.05 N</text>
+          <text x="115" y="213">Fuerzas opuestas e iguales</text>
+        </svg>`
+      },
+      {
+        number: "1.5", title: "Cuerpos rígidos y principio de transmisibilidad",
+        information: "Un cuerpo rígido es un modelo que considera despreciable su deformación. El principio de transmisibilidad permite mover una fuerza a lo largo de su misma línea de acción sin cambiar el efecto externo sobre el cuerpo.",
+        example: "Al empujar una barra horizontal con 20 N a lo largo de su línea central, el análisis del movimiento externo es equivalente aunque el punto de aplicación se desplace sobre esa línea.",
+        formula: "F⃗A = F⃗B  (misma magnitud, dirección, sentido y línea de acción)",
+        graph: `<svg class="unit-graph" viewBox="0 0 420 220" role="img" aria-label="Una misma fuerza horizontal aplicada en dos puntos distintos de una barra sobre la misma línea de acción">
+          <defs><marker id="u15-arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#79e1bd"/></marker></defs>
+          <rect class="object" x="100" y="88" width="220" height="40" rx="10"/>
+          <line class="guide" x1="65" y1="108" x2="355" y2="108"/>
+          <circle cx="140" cy="108" r="5" fill="#f09bd5"/><circle cx="260" cy="108" r="5" fill="#f09bd5"/>
+          <line class="force" x1="70" y1="108" x2="132" y2="108" marker-end="url(#u15-arrow)"/><text x="75" y="82">F en A</text>
+          <line class="force" x1="190" y1="108" x2="252" y2="108" marker-end="url(#u15-arrow)"/><text x="195" y="82">F en B</text>
+          <text x="135" y="153">A</text><text x="255" y="153">B</text><text x="111" y="190">Misma línea de acción</text>
+        </svg>`
+      },
+      {
+        number: "1.6", title: "Momento de una fuerza respecto a un punto",
+        information: "El momento o torque mide la tendencia de una fuerza a producir giro alrededor de un punto. Depende de la magnitud de la fuerza y de la distancia perpendicular entre el eje y su línea de acción.",
+        example: "Una persona aplica 10 N perpendicularmente al extremo de una llave a 0.20 m de la tuerca. El momento producido es 2 N·m.",
+        formula: "M = F·d⊥  ···  |M| = rF sen θ  ···  Equilibrio: ΣM = 0",
+        graph: `<svg class="unit-graph" viewBox="0 0 420 220" role="img" aria-label="Llave como palanca con brazo perpendicular de 0.20 metros y fuerza de 10 newtons que produce un momento">
+          <defs><marker id="u16-arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#79e1bd"/></marker><marker id="u16-rotation" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#f09bd5"/></marker></defs>
+          <circle cx="100" cy="145" r="9" class="object"/><line class="axis" x1="100" y1="145" x2="325" y2="145"/>
+          <line class="object" x1="100" y1="145" x2="310" y2="145"/><line class="force" x1="310" y1="145" x2="310" y2="48" marker-end="url(#u16-arrow)"/>
+          <path class="component" d="M 72 116 A 42 42 0 0 1 111 103" fill="none" marker-end="url(#u16-rotation)"/>
+          <line class="guide" x1="100" y1="176" x2="310" y2="176"/><line class="axis" x1="100" y1="168" x2="100" y2="184"/><line class="axis" x1="310" y1="168" x2="310" y2="184"/>
+          <text x="62" y="174">Eje</text><text x="323" y="75">F = 10 N</text><text x="177" y="201">d⊥ = 0.20 m</text><text x="210" y="119">Llave</text><text x="119" y="54">M = 2 N·m</text>
+        </svg>`
+      }
+    ];
+
+    const views = Array.from(document.querySelectorAll(".view"));
+    function showView(id) {
+      const target = document.getElementById(id);
+      if (!target) return;
+      views.forEach(view => view.classList.toggle("active", view === target));
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    document.addEventListener("click", event => {
+      const button = event.target.closest("[data-view]");
+      if (button) showView(button.dataset.view);
+    });
+
+    const unitList = document.getElementById("unit-list");
+    units.forEach((unit, index) => {
+      const button = document.createElement("button");
+      button.className = "unit-card";
+      button.type = "button";
+      button.innerHTML = `<span class="unit-number">${unit.number}</span><strong>${unit.title}</strong>`;
+      button.addEventListener("click", () => {
+        const content = document.getElementById("topic-content");
+        content.innerHTML = `<p class="eyebrow">Unidad ${unit.number}</p><h2 id="topic-title">${unit.title}</h2><h3>Información</h3><p>${unit.information}</p><h3>Ejemplo práctico</h3><div class="example">${unit.example}</div><h3>Fórmula</h3><div class="formula">${unit.formula}</div><h3>Gráfica</h3><div class="unit-graph-wrap">${unit.graph}</div><button class="primary-button" type="button" data-view="unidades">Regresar a unidades</button>`;
+        showView("tema");
+      });
+      unitList.appendChild(button);
+    });
+
+    const thermoCalculatorDefinitions = {
+      heat: {
+        title: "Cálculo de Calor",
+        fields: `
+          <label>Masa (kg)<input name="mass" type="number" min="0" step="any" placeholder="Ej. 0.5" required></label>
+          <label>Calor específico (J/kg · °C)<input name="specificHeat" type="number" min="0" step="any" placeholder="Ej. 4184" required></label>
+          <label>Temperatura inicial (°C)<input name="initialTemp" type="number" step="any" placeholder="Ej. 20" required></label>
+          <label>Temperatura final (°C)<input name="finalTemp" type="number" step="any" placeholder="Ej. 30" required></label>`
+      },
+      "specific-heat": {
+        title: "Cálculo de Calor Específico",
+        fields: `
+          <label>Calor Q (Joules)<input name="heat" type="number" step="any" placeholder="Ej. 20920" required></label>
+          <label>Masa (kg)<input name="mass" type="number" min="0" step="any" placeholder="Ej. 0.5" required></label>
+          <label>Temperatura inicial (°C)<input name="initialTemp" type="number" step="any" placeholder="Ej. 20" required></label>
+          <label>Temperatura final (°C)<input name="finalTemp" type="number" step="any" placeholder="Ej. 30" required></label>`
+      },
+      temperature: {
+        title: "Conversor de temperatura",
+        fields: `
+          <label>Conversión<select name="conversion" required>
+            <option value="c-f">Celsius a Fahrenheit</option>
+            <option value="f-c">Fahrenheit a Celsius</option>
+            <option value="c-k">Celsius a Kelvin</option>
+          </select></label>
+          <label>Temperatura<input name="temperature" type="number" step="any" placeholder="Ingresa el valor" required></label>`
+      },
+      equivalence: {
+        title: "Equivalencias de calor",
+        fields: `
+          <label><span>Valor en joules (J)</span><input name="energy" type="number" min="0" step="any" placeholder="Ej. 1000" required></label>
+          <label>Unidad de origen<select name="energyUnit" required>
+            <option value="J" selected>joules (J)</option>
+            <option value="kcal">kilocalorías (kcal)</option>
+            <option value="kWh">kilowatt-hora (kWh)</option>
+          </select></label>`
+      }
+    };
+
+    const thermoCalcForm = document.getElementById("thermo-calc-form");
+    const thermoCalcFields = document.getElementById("thermo-calc-fields");
+    const thermoCalcError = document.getElementById("thermo-calc-error");
+    const thermoCalcResult = document.getElementById("thermo-calc-result");
+    let activeThermoCalculator = null;
+
+    thermoCalcFields.addEventListener("change", event => {
+      if (!(event.target instanceof HTMLSelectElement) || event.target.name !== "energyUnit") return;
+      const unitLabels = {
+        J: "Valor en joules (J)",
+        kcal: "Valor de kilocalorías (kcal)",
+        kWh: "Valor en kilowatt-hora (kWh)"
+      };
+      thermoCalcFields.querySelector('input[name="energy"]').previousElementSibling.textContent = unitLabels[event.target.value];
+    });
+
+    document.addEventListener("click", event => {
+      const button = event.target.closest("[data-thermo-calc]");
+      if (!button) return;
+      activeThermoCalculator = button.dataset.thermoCalc;
+      const calculator = thermoCalculatorDefinitions[activeThermoCalculator];
+      if (!calculator) return;
+      thermoCalcForm.reset();
+      thermoCalcFields.innerHTML = calculator.fields;
+      document.getElementById("thermo-calc-title").textContent = calculator.title;
+      thermoCalcError.textContent = "";
+      thermoCalcResult.textContent = "Ingresa los datos y presiona Calcular. Aquí se mostrará la fórmula, la sustitución y el resultado.";
+      showView("thermo-calc");
+    });
+
+    const formatThermoNumber = value => Number(value.toPrecision(7)).toLocaleString("es-MX");
+    const thermoInput = (form, name) => {
+      const field = form.elements[name];
+      return field ? field.value : "";
+    };
+
+    thermoCalcForm.addEventListener("submit", event => {
+      event.preventDefault();
+      thermoCalcError.textContent = "";
+      if (!activeThermoCalculator || !thermoCalcForm.reportValidity()) return;
+      const number = name => Number(thermoInput(thermoCalcForm, name));
+      const requiredNames = {
+        heat: ["mass", "specificHeat", "initialTemp", "finalTemp"],
+        "specific-heat": ["heat", "mass", "initialTemp", "finalTemp"],
+        temperature: ["temperature"],
+        equivalence: ["energy"]
+      }[activeThermoCalculator];
+      if (requiredNames.some(name => thermoInput(thermoCalcForm, name).trim() === "" || !Number.isFinite(number(name)))) {
+        thermoCalcError.textContent = "Ingresa valores numéricos válidos en todos los campos.";
+        return;
+      }
+
+      let answer;
+      let unit;
+      let steps = [];
+      if (activeThermoCalculator === "heat") {
+        const mass = number("mass");
+        const specificHeat = number("specificHeat");
+        const initialTemp = number("initialTemp");
+        const finalTemp = number("finalTemp");
+        if (mass <= 0 || specificHeat <= 0) {
+          thermoCalcError.textContent = "La masa y el calor específico deben ser mayores que cero.";
+          return;
+        }
+        const deltaTemp = finalTemp - initialTemp;
+        answer = mass * specificHeat * deltaTemp;
+        unit = "J";
+        steps = [
+          "Fórmula de calor sensible: Q = m · c · ΔT.",
+          `Cambio de temperatura: ΔT = Tf − Ti = ${formatThermoNumber(finalTemp)} − (${formatThermoNumber(initialTemp)}) = ${formatThermoNumber(deltaTemp)} °C.`,
+          `Sustitución: Q = ${formatThermoNumber(mass)} kg × ${formatThermoNumber(specificHeat)} J/(kg·°C) × ${formatThermoNumber(deltaTemp)} °C.`,
+          `Resultado: Q = ${formatThermoNumber(answer)} J. ${answer < 0 ? "El signo negativo indica que el sistema libera calor." : answer > 0 ? "El signo positivo indica que el sistema absorbe calor." : "No hay cambio neto de calor sensible porque ΔT es cero."}`
+        ];
+      } else if (activeThermoCalculator === "specific-heat") {
+        const heat = number("heat");
+        const mass = number("mass");
+        const initialTemp = number("initialTemp");
+        const finalTemp = number("finalTemp");
+        if (mass <= 0) {
+          thermoCalcError.textContent = "La masa debe ser mayor que cero.";
+          return;
+        }
+        const deltaTemp = finalTemp - initialTemp;
+        if (deltaTemp === 0) {
+          thermoCalcError.textContent = "La diferencia de temperatura no puede ser cero para calcular c.";
+          return;
+        }
+        answer = heat / (mass * deltaTemp);
+        if (answer <= 0) {
+          thermoCalcError.textContent = "El calor y el cambio de temperatura deben tener el mismo signo para obtener un calor específico positivo.";
+          return;
+        }
+        unit = "J/(kg·°C)";
+        steps = [
+          "Fórmula del calor específico: c = Q / (m · ΔT).",
+          `Cambio de temperatura: ΔT = Tf − Ti = ${formatThermoNumber(finalTemp)} − (${formatThermoNumber(initialTemp)}) = ${formatThermoNumber(deltaTemp)} °C.`,
+          `Sustitución: c = ${formatThermoNumber(heat)} J / (${formatThermoNumber(mass)} kg × ${formatThermoNumber(deltaTemp)} °C).`,
+          `Resultado: c = ${formatThermoNumber(answer)} J/(kg·°C).`
+        ];
+      } else if (activeThermoCalculator === "temperature") {
+        const temperature = number("temperature");
+        const conversion = thermoInput(thermoCalcForm, "conversion");
+        if (conversion === "c-f") {
+          answer = temperature * 9 / 5 + 32;
+          unit = "°F";
+          steps = [
+            "Fórmula: °F = (9/5) × °C + 32.",
+            `Sustitución: °F = (9/5) × ${formatThermoNumber(temperature)} + 32.`,
+            `Resultado: ${formatThermoNumber(temperature)} °C = ${formatThermoNumber(answer)} °F.`
+          ];
+        } else if (conversion === "f-c") {
+          answer = (temperature - 32) * 5 / 9;
+          unit = "°C";
+          steps = [
+            "Fórmula: °C = (°F − 32) × (5/9).",
+            `Sustitución: °C = (${formatThermoNumber(temperature)} − 32) × (5/9).`,
+            `Resultado: ${formatThermoNumber(temperature)} °F = ${formatThermoNumber(answer)} °C.`
+          ];
+        } else {
+          answer = temperature + 273.15;
+          if (answer < 0) {
+            thermoCalcError.textContent = "La temperatura no puede ser menor que el cero absoluto (−273.15 °C).";
+            return;
+          }
+          unit = "K";
+          steps = [
+            "Fórmula: K = °C + 273.15.",
+            `Sustitución: K = ${formatThermoNumber(temperature)} + 273.15.`,
+            `Resultado: ${formatThermoNumber(temperature)} °C = ${formatThermoNumber(answer)} K.`
+          ];
+        }
+      } else {
+        const energy = number("energy");
+        const energyUnit = thermoInput(thermoCalcForm, "energyUnit");
+        const jouleFactors = { J: 1, cal: 4.184, kcal: 4184, kWh: 3600000 };
+        const joules = energy * jouleFactors[energyUnit];
+        if (!Number.isFinite(joules)) {
+          thermoCalcError.textContent = "La cantidad está fuera del rango numérico permitido.";
+          return;
+        }
+        const jouleResult = joules;
+        const calorieResult = joules / 4.184;
+        const kilocalorieResult = joules / 4184;
+        const kilowattHourResult = joules / 3600000;
+        answer = joules;
+        unit = "J";
+        steps = [
+          `Equivalencia de partida: 1 kcal = 4 184 J; 1 cal = 4.184 J; 1 kWh = 3 600 000 J.`,
+          `Conversión a joules: ${formatThermoNumber(energy)} ${energyUnit} × ${formatThermoNumber(jouleFactors[energyUnit])} J/${energyUnit} = ${formatThermoNumber(joules)} J.`,
+          `A calorías: ${formatThermoNumber(joules)} J ÷ 4.184 = ${formatThermoNumber(calorieResult)} cal.`,
+          `A kilocalorías: ${formatThermoNumber(joules)} J ÷ 4 184 = ${formatThermoNumber(kilocalorieResult)} kcal.`,
+          `A kilowatt-hora: ${formatThermoNumber(joules)} J ÷ 3 600 000 = ${formatThermoNumber(kilowattHourResult)} kWh.`,
+          `Equivalencias: ${formatThermoNumber(jouleResult)} J = ${formatThermoNumber(calorieResult)} cal = ${formatThermoNumber(kilocalorieResult)} kcal = ${formatThermoNumber(kilowattHourResult)} kWh.`
+        ];
+      }
+
+      if (!Number.isFinite(answer)) {
+        thermoCalcError.textContent = "El resultado está fuera del rango numérico permitido.";
+        return;
+      }
+      thermoCalcResult.innerHTML = `<p class="thermo-result">Resultado: ${formatThermoNumber(answer)} ${unit}</p><ol>${steps.map(step => `<li>${step}</li>`).join("")}</ol>`;
+    });
+
+    document.getElementById("thermo-calc-clear").addEventListener("click", () => {
+      thermoCalcForm.reset();
+      thermoCalcError.textContent = "";
+      thermoCalcResult.textContent = "Ingresa los datos y presiona Calcular. Aquí se mostrará la fórmula, la sustitución y el resultado.";
+    });
+
+    const canvas = document.getElementById("force-chart");
+    const context = canvas.getContext("2d");
+    const result = document.getElementById("result");
+    const calcError = document.getElementById("calc-error");
+    let lastCalculation = null;
+
+    function drawChart(calculation) {
+      const ratio = window.devicePixelRatio || 1;
+      const width = canvas.clientWidth;
+      const height = canvas.clientHeight;
+      canvas.width = Math.round(width * ratio);
+      canvas.height = Math.round(height * ratio);
+      context.setTransform(ratio, 0, 0, ratio, 0, 0);
+      context.clearRect(0, 0, width, height);
+      const styles = getComputedStyle(document.documentElement);
+      const muted = styles.getPropertyValue("--muted").trim();
+      const grid = "rgba(203, 177, 242, .15)";
+      const origin = { x: width / 2, y: height / 2 };
+      const maxX = calculation ? Math.max(Math.abs(calculation.fx), 1) : 10;
+      const maxY = calculation ? Math.max(Math.abs(calculation.fy), 1) : 10;
+      const scale = Math.min((width / 2 - 28) / maxX, (height / 2 - 28) / maxY) / 1.2;
+
+      context.lineWidth = 1;
+      context.strokeStyle = grid;
+      context.beginPath();
+      context.moveTo(origin.x, 12);
+      context.lineTo(origin.x, height - 12);
+      context.moveTo(12, origin.y);
+      context.lineTo(width - 12, origin.y);
+      context.stroke();
+      context.fillStyle = muted;
+      context.font = "12px system-ui, sans-serif";
+      context.fillText("y", origin.x + 7, 20);
+      context.fillText("x", width - 18, origin.y - 9);
+      context.fillText("O", origin.x - 16, origin.y + 17);
+
+      if (!calculation) {
+        context.fillStyle = muted;
+        context.textAlign = "center";
+        context.fillText("Ingresa los datos y presiona Calcular", width / 2, height / 2);
+        context.textAlign = "start";
+        return;
+      }
+
+      function arrow(x, y, color, label, dashed, startX = 0, startY = 0) {
+        const startCanvasX = origin.x + startX * scale;
+        const startCanvasY = origin.y - startY * scale;
+        const endX = origin.x + (startX + x) * scale;
+        const endY = origin.y - (startY + y) * scale;
+        const angle = Math.atan2(endY - startCanvasY, endX - startCanvasX);
+        context.save();
+        context.strokeStyle = color;
+        context.fillStyle = color;
+        context.lineWidth = label === "F" ? 3 : 2;
+        if (dashed) context.setLineDash([5, 4]);
+        context.beginPath();
+        context.moveTo(startCanvasX, startCanvasY);
+        context.lineTo(endX, endY);
+        context.stroke();
+        context.setLineDash([]);
+        context.beginPath();
+        context.moveTo(endX, endY);
+        context.lineTo(endX - 10 * Math.cos(angle - Math.PI / 6), endY - 10 * Math.sin(angle - Math.PI / 6));
+        context.lineTo(endX - 10 * Math.cos(angle + Math.PI / 6), endY - 10 * Math.sin(angle + Math.PI / 6));
+        context.closePath();
+        context.fill();
+        context.font = "bold 12px system-ui, sans-serif";
+        context.fillText(label, endX + 7, endY - 7);
+        context.restore();
+      }
+      arrow(calculation.fx, 0, "#f09bd5", "Fx", true);
+      arrow(0, calculation.fy, "#79e1bd", "Fy", true, calculation.fx, 0);
+      arrow(calculation.fx, calculation.fy, "#c6a5ff", "F", false);
+    }
+
+    document.getElementById("force-form").addEventListener("submit", event => {
+      event.preventDefault();
+      calcError.textContent = "";
+      const mass = Number(document.getElementById("mass").value);
+      const acceleration = Number(document.getElementById("acceleration").value);
+      const angle = Number(document.getElementById("angle").value);
+      if (![mass, acceleration, angle].every(Number.isFinite) ||
+          document.getElementById("mass").value === "" ||
+          document.getElementById("acceleration").value === "" ||
+          document.getElementById("angle").value === "") {
+        calcError.textContent = "Completa los tres campos con valores numéricos válidos.";
+        return;
+      }
+      if (mass < 0 || acceleration < 0) {
+        calcError.textContent = "La masa y la aceleración deben ser mayores o iguales a cero.";
+        return;
+      }
+      const force = mass * acceleration;
+      const radians = angle * Math.PI / 180;
+      const fx = force * Math.cos(radians);
+      const fy = force * Math.sin(radians);
+      if (![force, fx, fy].every(Number.isFinite)) {
+        calcError.textContent = "El resultado está fuera del rango numérico permitido.";
+        return;
+      }
+      lastCalculation = { force, fx, fy };
+      const format = value => Number(value.toFixed(4)).toLocaleString("es-MX");
+      const normalizedAngle = ((angle % 360) + 360) % 360;
+      result.innerHTML = `<strong>Resultados del cálculo</strong><p>Fuerza resultante: <b>${format(force)} N</b></p><p>Componente horizontal Fx: <b>${format(fx)} N</b></p><p>Componente vertical Fy: <b>${format(fy)} N</b></p><section class="force-procedure"><h3>Procedimiento</h3><ol><li>Calcula la fuerza resultante con la segunda ley de Newton: <b>F = m · a</b>.</li><li>Sustituye los datos: <b>F = ${format(mass)} kg × ${format(acceleration)} m/s² = ${format(force)} N</b>.</li><li>Convierte el ángulo a radianes para las funciones trigonométricas: <b>θ = ${format(angle)}° × π/180 = ${format(radians)} rad</b>. Para la dirección del vector se toma ${format(normalizedAngle)}° dentro de una vuelta completa.</li><li>Calcula la componente horizontal: <b>Fx = F cos θ = ${format(force)} × cos(${format(angle)}°) = ${format(fx)} N</b>.</li><li>Calcula la componente vertical: <b>Fy = F sen θ = ${format(force)} × sen(${format(angle)}°) = ${format(fy)} N</b>.</li><li>Comprueba que la magnitud coincide: <b>√(Fx² + Fy²) = √(${format(fx)}² + ${format(fy)}²) = ${format(force)} N</b>.</li></ol></section>`;
+      result.hidden = false;
+      drawChart(lastCalculation);
+    });
+
+    document.getElementById("clear-button").addEventListener("click", () => {
+      document.getElementById("force-form").reset();
+      calcError.textContent = "";
+      result.replaceChildren();
+      result.hidden = true;
+      lastCalculation = null;
+      drawChart(null);
+    });
+    window.addEventListener("resize", () => drawChart(lastCalculation));
+    drawChart(null);
+  </script>
+
+
+</body></html>
